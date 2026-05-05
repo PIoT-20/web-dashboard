@@ -1,10 +1,8 @@
 class Point {
-  x: number
-  y: number
+  id: string
   level: number
-  constructor(x: number, y: number, level: number) {
-    this.x = x
-    this.y = y
+  constructor(id: string, level: number) {
+    this.id = id
     this.level = level
   }
 }

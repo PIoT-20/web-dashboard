@@ -16,27 +16,27 @@
   display: flex;
   flex-direction: row;
   gap: 16px;
-  height: 100%;
-  width: 100%;
+  height: 100vh;
+
   padding: 16px;
+  width: 100%;
+
   box-sizing: border-box;
 }
 #side-content {
-  /*background-color: blue;*/
   height: 100%;
   width: 25%;
-  /* margin-right: 16px; */
+  position: relative;
 }
 #main-content {
-  /*background-color: black;*/
   height: 100%;
   width: 75%;
-  /* margin-left: 16px; */
+  max-height: 100%;
+  position: relative;
 }
 .card {
-  background-color: blue;
+  position: relative;
 
-  background-color: white;
   border-radius: 30px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   text-align: center;

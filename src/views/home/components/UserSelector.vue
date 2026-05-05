@@ -1,10 +1,17 @@
 <script setup lang="ts">
 import { parseUsers, User } from '@/models/user-model'
-import { ref, watch } from 'vue'
+import { onMounted, ref, watch } from 'vue'
 
-const userList: User[] = parseUsers(localStorage.getItem('users')!) || '[]'
 const emit = defineEmits(['userSelected'])
-const userSelected = ref<User>(new User())
+const userSelected = ref(new User())
+const userList = ref(parseUsers(localStorage.getItem('users') || '[]'))
+watch(
+  () => parseUsers(localStorage.getItem('users') || '[]'),
+  (newVal) => {
+    userList.value = newVal
+  },
+)
+onMounted(() => console.log(userList.value))
 </script>
 <template>
   <div class="user-selector">
@@ -17,7 +24,9 @@ const userSelected = ref<User>(new User())
 
 <style scoped>
 .user-selector {
-  width: 100%;
   height: 200px;
+}
+select {
+  width: 100%;
 }
 </style>

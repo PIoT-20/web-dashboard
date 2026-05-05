@@ -1,35 +1,14 @@
 <script async setup lang="ts">
-import { ref, type Ref } from 'vue'
-import BaseLayout from '../../components/BaseLayout.vue'
-import HitMap from './components/HitMap.vue'
-import { User } from '@/models/user-model'
-import UserSelector from './components/UserSelector.vue'
-
-const user = ref<User>()
+import HomeContent from './components/HomeContent.vue'
+import SideBar from './components/SideBar.vue'
 </script>
 
 <template>
   <div id="home-div">
-    <BaseLayout>
-      <template v-slot:main>
-        <!-- <label>main</label> -->
-        <Suspense>
-          <HitMap :selected_user="user" />
-          <template #fallback> Loading... </template>
-        </Suspense>
-      </template>
-      <template v-slot:side>
-        <UserSelector
-          :user="user"
-          v-on:user-selected="
-            (userSelected) => {
-              user = userSelected
-              console.log('User selected:', userSelected)
-            }
-          "
-        />
-      </template>
-    </BaseLayout>
+    <div id="sidebar">
+      <SideBar />
+    </div>
+    <HomeContent />
   </div>
 </template>
 
@@ -44,6 +23,11 @@ const user = ref<User>()
   justify-items: center;
   align-items: center;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+}
+#sidebar {
+  height: 100%;
+  width: 10%;
+  margin: 16px;
 }
 </style>
