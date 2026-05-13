@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const qisAddress = 'http://localhost:8084'
+const qisAddress = import.meta.env.VITE_QIS_URL
 
 export async function getQisReadings(
   client_id: string,

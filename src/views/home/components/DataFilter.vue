@@ -14,6 +14,12 @@ const deviceTypes: Ref<string[]> = ref([])
 const emits = defineEmits(['filter'])
 
 async function emitData() {
+    const start_time_raw = new Date(start_time.value)
+    // start_time_raw.setHours(start_time_raw.getHours() + 2)
+    start_time.value = start_time_raw.toISOString()
+    const end_time_raw = new Date(end_time.value)
+    // end_time_raw.setHours(end_time_raw.getHours() + 2)
+    end_time.value = end_time_raw.toISOString()
     const data = await getQis(props.user._id.toString(), start_time.value, end_time.value)
     const filteredData = data!.quality_indexes.filter((qi) => qi.device_type == device_type.value)
     emits('filter', filteredData)

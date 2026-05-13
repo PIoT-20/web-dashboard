@@ -2,7 +2,7 @@ import axios from 'axios'
 import { EJSON } from 'bson'
 
 
-const catalogAddress = 'http://localhost:8085'
+const catalogAddress = import.meta.env.VITE_CATALOG_URL
 
 async function getDevicesByUserId(userId: string): Promise<string> {
 

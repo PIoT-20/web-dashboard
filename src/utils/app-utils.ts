@@ -9,7 +9,7 @@ export async function setupAppCache() {
     users.forEach(async (u) => {
       const devices = await getDeviceListByUserId(u._id.toString())
       if (devices) {
-        localStorage.setItem('devices', JSON.stringify(devices))
+        localStorage.setItem(`devices_${u._id}`, JSON.stringify(devices))
       }
     })
   }

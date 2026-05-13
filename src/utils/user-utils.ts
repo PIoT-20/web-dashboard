@@ -3,6 +3,10 @@ import { createUserService, getUsersService } from '@/services/user-service'
 import { EJSON } from 'bson'
 
 async function getUserList(): Promise<User[] | void> {
+  const cache = localStorage.getItem('users')
+  if (cache) {
+    return parseUsers(cache)
+  }
   return getUsersService().then((res) => {
     return parseUsers(res)
   })
