@@ -3,7 +3,7 @@ import axios from 'axios'
 import { EJSON } from 'bson'
 
 async function getUsersService(): Promise<string> {
-  const catalogAddress = process.env.CATALOG_ADDRESS
+  const catalogAddress = import.meta.env.CATALOG_ADDRESS
   return axios
     .get(`${catalogAddress}/user`, {
       headers: { 'Content-Type': 'application/json', Accept: '*/*' },
@@ -16,7 +16,7 @@ async function getUsersService(): Promise<string> {
     })
 }
 async function createUserService(user: User): Promise<any> {
-  const catalogAddress = process.env.CATALOG_ADDRESS
+  const catalogAddress = import.meta.env.CATALOG_ADDRESS
   return axios
     .post(`${catalogAddress}/user`, JSON.stringify(user), {
       headers: { 'Content-Type': 'application/json', Accept: '*/*' },

@@ -5,7 +5,7 @@ export async function getQisReadings(
   start_time: string,
   end_time: string,
 ): Promise<string> {
-  const qisAddress = process.env.QIS_ADDRESS
+  const qisAddress = import.meta.env.QIS_ADDRESS
   return axios
     .get(`${qisAddress}/client_id=${client_id}&start_time=${start_time}&end_time=${end_time}`)
     .then((res) => {

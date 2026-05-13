@@ -2,7 +2,7 @@ import axios from 'axios'
 import { EJSON } from 'bson'
 
 async function getDevicesByUserId(userId: string): Promise<string> {
-  const catalogAddress = process.env.CATALOG_ADDRESS
+  const catalogAddress = import.meta.env.CATALOG_ADDRESS
   return axios
     .get(`${catalogAddress}/device/?client_id=${userId}`, {
       headers: { 'Content-Type': 'application/json', Accept: '*/*' },
