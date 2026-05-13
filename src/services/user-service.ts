@@ -1,11 +1,11 @@
-import type { n } from 'vue-router/dist/index-DJQJwTR2.js'
-import { User } from '../models/user-model.ts'
+import { User } from '../models/user-model'
 import axios from 'axios'
 import { EJSON } from 'bson'
 
 async function getUsersService(): Promise<string> {
+  const catalogAddress = process.env.CATALOG_ADDRESS
   return axios
-    .get('http://127.0.0.1:8080/user', {
+    .get(`${catalogAddress}/user`, {
       headers: { 'Content-Type': 'application/json', Accept: '*/*' },
     })
     .then((res) => {
@@ -16,8 +16,9 @@ async function getUsersService(): Promise<string> {
     })
 }
 async function createUserService(user: User): Promise<any> {
+  const catalogAddress = process.env.CATALOG_ADDRESS
   return axios
-    .post('http://127.0.0.1:8080/user', JSON.stringify(user), {
+    .post(`${catalogAddress}/user`, JSON.stringify(user), {
       headers: { 'Content-Type': 'application/json', Accept: '*/*' },
     })
     .catch((err) => {
