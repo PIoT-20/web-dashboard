@@ -4,7 +4,6 @@ import { EJSON } from 'bson'
 
 async function getUserList(): Promise<User[] | void> {
   return getUsersService().then((res) => {
-    localStorage.setItem('users', res)
     return parseUsers(res)
   })
 }

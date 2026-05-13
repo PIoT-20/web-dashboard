@@ -1,14 +1,15 @@
 <script setup lang="ts">
 import { RouterView } from 'vue-router'
 import { getUserList } from './utils/user-utils'
-import { onBeforeMount } from 'vue'
-onBeforeMount(async () => {
-  await getUserList()
+import { onMounted } from 'vue'
+import { setupAppCache } from './utils/app-utils'
+onMounted(async () => {
+    await setupAppCache()
 })
 </script>
 
 <template>
-  <router-view />
+    <router-view />
 </template>
 
 <style scoped></style>

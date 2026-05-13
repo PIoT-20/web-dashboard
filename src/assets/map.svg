@@ -1,0 +1,46 @@
+<svg width="800" height="600" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+      <!-- Exterior Walls -->
+      <path id="exterior_boundary" d="M50,50 L750,50 L750,550 L50,550 Z" fill="none"
+            stroke="#2c3e50" stroke-width="4" />
+
+      <!-- Room 1: Research & Development (Top Left) -->
+      <path id="Room 101" data-name="R&amp;D Lab"
+            d="M60,60 L340,60 L340,240 L60,240 Z"
+            fill="#ffffff" stroke="#34495e" stroke-width="2" />
+      <text x="200" y="160" font-family="Arial" font-size="16" text-anchor="middle" fill="#2c3e50">R&amp;D
+            Lab</text>
+
+      <!-- Room 2: Engineering (Top Right) -->
+      <path id="room_eng" data-name="Engineering Wing"
+            d="M460,60 L740,60 L740,240 L460,240 Z"
+            fill="#ffffff" stroke="#34495e" stroke-width="2" />
+      <text x="600" y="160" font-family="Arial" font-size="16" text-anchor="middle" fill="#2c3e50">
+            Engineering</text>
+
+      <!-- Room 3: Central Hub (Reception/Lounge) -->
+      <path id="room_hub" data-name="Central Hub"
+            d="M300,260 L500,260 L500,340 L300,340 Z"
+            fill="#ecf0f1" stroke="#34495e" stroke-width="2" />
+      <text x="400" y="305" font-family="Arial" font-size="14" font-weight="bold"
+            text-anchor="middle" fill="#2c3e50">RECEPTION</text>
+
+      <!-- Room 4: Strategy Room (Bottom Left) -->
+      <path id="room_strat" data-name="Strategy Suite"
+            d="M60,360 L340,360 L340,540 L60,540 Z"
+            fill="#ffffff" stroke="#34495e" stroke-width="2" />
+      <text x="200" y="460" font-family="Arial" font-size="16" text-anchor="middle" fill="#2c3e50">Strategy
+            Room</text>
+
+      <!-- Room 5: Data Operations (Bottom Right) -->
+      <path id="room_ops" data-name="Operations Center"
+            d="M460,360 L740,360 L740,540 L460,540 Z"
+            fill="#ffffff" stroke="#34495e" stroke-width="2" />
+      <text x="600" y="460" font-family="Arial" font-size="16" text-anchor="middle" fill="#2c3e50">Data
+            Ops</text>
+
+      <!-- Hallways / Connectors -->
+      <path id="hallway_v" d="M360,60 L440,60 L440,540 L360,540 Z" fill="#f8f9fa" stroke="#bdc3c7"
+            stroke-dasharray="5,5" />
+      <path id="hallway_h" d="M60,280 L740,280 L740,320 L60,320 Z" fill="#f8f9fa" stroke="#bdc3c7"
+            stroke-dasharray="5,5" />
+</svg>

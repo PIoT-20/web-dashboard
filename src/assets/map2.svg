@@ -1,0 +1,48 @@
+<svg width="800" height="500" viewBox="0 0 800 500" xmlns="http://www.w3.org/2000/svg">
+    <!-- Department Boundary -->
+    <path id="dept_exterior" d="M20,20 L780,20 L780,480 L20,480 Z" fill="none" stroke="#2c3e50"
+        stroke-width="3" />
+
+    <!-- Main Corridor (High Traffic Area) -->
+    <path id="corridor" d="M20,210 L780,210 L780,290 L20,290 Z" fill="#f4f7f6" stroke="#dcdde1"
+        stroke-width="1" />
+
+    <!-- Room 101: Lecture Hall (Top Left) -->
+    <path id="room_101" data-name="Lecture Hall A"
+        d="M40,40 L380,40 L380,190 L40,190 Z"
+        fill="#ffffff" stroke="#34495e" stroke-width="2" />
+    <text x="210" y="115" font-family="Arial" font-size="18" font-weight="bold" text-anchor="middle"
+        fill="#2c3e50">101: Lecture Hall A</text>
+
+    <!-- Room 102: Computer Lab (Top Right) -->
+    <path id="room_102" data-name="CS Computing Lab"
+        d="M420,40 L760,40 L760,190 L420,190 Z"
+        fill="#ffffff" stroke="#34495e" stroke-width="2" />
+    <text x="590" y="115" font-family="Arial" font-size="18" font-weight="bold" text-anchor="middle"
+        fill="#2c3e50">102: CS Lab</text>
+
+    <!-- Room 103: Seminar Room (Bottom Left) -->
+    <path id="room_103" data-name="Seminar Room 1"
+        d="M40,310 L260,310 L260,460 L40,460 Z"
+        fill="#ffffff" stroke="#34495e" stroke-width="2" />
+    <text x="150" y="395" font-family="Arial" font-size="16" text-anchor="middle" fill="#2c3e50">103:
+        Seminar</text>
+
+    <!-- Room 104: Research Lab (Bottom Center) -->
+    <path id="lab_01" data-name="AI Research Wing"
+        d="M300,310 L540,310 L540,460 L300,460 Z"
+        fill="#f8f9fa" stroke="#34495e" stroke-width="2" />
+    <text x="420" y="395" font-family="Arial" font-size="16" font-style="italic"
+        text-anchor="middle" fill="#2c3e50">AI Research Lab</text>
+
+    <!-- Room 105: Faculty Office (Bottom Right) -->
+    <path id="room_105" data-name="Department Office"
+        d="M580,310 L760,310 L760,460 L580,460 Z"
+        fill="#ffffff" stroke="#34495e" stroke-width="2" />
+    <text x="670" y="395" font-family="Arial" font-size="16" text-anchor="middle" fill="#2c3e50">105:
+        Admin</text>
+
+    <!-- Corridor Labels -->
+    <text x="400" y="255" font-family="Arial" font-size="12" fill="#95a5a6" text-anchor="middle"
+        letter-spacing="5">MAIN CORRIDOR</text>
+</svg>
