@@ -4,22 +4,19 @@ import { getDeviceListByUserId } from '@/utils/device-utils'
 
 import { getQis } from '@/utils/time-series-utils'
 
-import { onMounted, ref, watch, type Ref } from 'vue'
+import { ref, watch, type Ref } from 'vue'
 
 const start_time = ref('')
 const end_time = ref('')
 const device_type = ref('')
-const props = defineProps<{ user: User }>()
+const props = defineProps<{ user: User | undefined }>()
 const deviceTypes: Ref<string[]> = ref([])
 const emits = defineEmits(['filter'])
 
 async function emitData() {
-    const start_time_raw = new Date(start_time.value)
-    // start_time_raw.setHours(start_time_raw.getHours() + 2)
-    start_time.value = start_time_raw.toISOString()
-    const end_time_raw = new Date(end_time.value)
-    // end_time_raw.setHours(end_time_raw.getHours() + 2)
-    end_time.value = end_time_raw.toISOString()
+    if (!props.user) return
+    start_time.value = new Date(start_time.value).toISOString()
+    end_time.value = new Date(end_time.value).toISOString()
     const data = await getQis(props.user._id.toString(), start_time.value, end_time.value)
     const filteredData = data!.quality_indexes.filter((qi) => qi.device_type == device_type.value)
     emits('filter', filteredData)
@@ -34,6 +31,7 @@ async function getDeviceTypes(userID: string): Promise<string[]> {
 watch(
     () => props.user,
     async (nUser) => {
+        if (!nUser) return
         deviceTypes.value = await getDeviceTypes(nUser._id.toString())
         console.log(deviceTypes.value)
     },

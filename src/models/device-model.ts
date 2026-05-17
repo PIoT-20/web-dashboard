@@ -1,6 +1,7 @@
 import { ObjectId, EJSON } from 'bson'
 import { SensorModel } from './sensor-model.ts'
 import { ConnectionInfoModel } from './connection-info-model.ts'
+import { deviceController } from '@/controllers/app-controller.ts'
 
 export class DeviceModel {
   _id: ObjectId

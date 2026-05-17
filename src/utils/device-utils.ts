@@ -13,14 +13,7 @@ async function getDeviceListByUserId(userId: string): Promise<DeviceModel[]> {
   })
 }
 
-function handleDeviceStorage(event: StorageEvent): void {
-  if (event.key === `devices_`) {
-    deviceController.value[''] = parseDevices(event.newValue!)
-  }
-}
 
-function setupDeviceStorage(userId: string): void {
-  storageClient.watch(`devices-${userId}`, handleDeviceStorage)
-}
+
 
 export { getDeviceListByUserId }

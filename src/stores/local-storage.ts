@@ -12,7 +12,7 @@ class LocalStorage implements LocalStorageInterface {
   remove(key: string): void {
     localStorage.removeItem(key)
   }
-  watch(key: string, callback: (event: StorageEvent) => void): void {
+  watch(callback: (event: StorageEvent) => void): void {
     addEventListener("storage", callback)
   }
 }

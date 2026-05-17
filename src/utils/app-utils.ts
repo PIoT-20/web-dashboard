@@ -1,4 +1,6 @@
-async function setupApp() {
+import { setupUserDevices, setupUsersWatch } from "./user-utils";
 
+export async function setupApp() {
+  setupUsersWatch()
+  await setupUserDevices()
 }
-export default setupApp;

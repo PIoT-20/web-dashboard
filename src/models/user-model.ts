@@ -1,5 +1,7 @@
+import { deviceController, userController } from '@/controllers/app-controller.ts'
 import { Point } from './point-model.ts'
 import { EJSON, ObjectId } from 'bson'
+import { parseDevices } from './device-model.ts'
 
 class User {
   _id: ObjectId
@@ -19,6 +21,16 @@ class User {
     this.email = email
     this.svg_map = svg_map
     this.points = points
+  }
+  // watch(event: StorageEvent): void {
+  //   if (event.key === `users`) {
+  //     userController.value = parseUsers(event.newValue!)
+  //   }
+  // }
+  watchUserDevices(event: StorageEvent): void {
+    if (event.key === `devices_${this._id.toString()}`) {
+      deviceController.value[`devices_${this._id.toString()}`] = parseDevices(event.newValue!)
+    }
   }
 }
 function parseUser(user_str: string): User {
