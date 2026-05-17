@@ -1,5 +1,5 @@
 import { User } from '../models/user-model'
-import axios from 'axios'
+import httpClient from '@/api/http-client'
 import { EJSON } from 'bson'
 
 const catalogAddress = import.meta.env.VITE_CATALOG_URL
@@ -7,10 +7,8 @@ const catalogAddress = import.meta.env.VITE_CATALOG_URL
 async function getUsersService(): Promise<string> {
 
 
-  return axios
-    .get(`${catalogAddress}/user`, {
-      headers: { 'Content-Type': 'application/json', Accept: '*/*' },
-    })
+  return httpClient
+    .get(`${catalogAddress}/user`)
     .then((res) => {
       return EJSON.stringify(res.data)
     })
@@ -20,10 +18,8 @@ async function getUsersService(): Promise<string> {
 }
 async function createUserService(user: User): Promise<any> {
 
-  return axios
-    .post(`${catalogAddress}/user`, JSON.stringify(user), {
-      headers: { 'Content-Type': 'application/json', Accept: '*/*' },
-    })
+  return httpClient
+    .post(`${catalogAddress}/user`, JSON.stringify(user))
     .catch((err) => {
       throw `could not create user\n ${err} `
     })

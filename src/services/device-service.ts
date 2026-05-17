@@ -1,4 +1,4 @@
-import axios from 'axios'
+import httpClient from '@/api/http-client'
 import { EJSON } from 'bson'
 
 
@@ -6,10 +6,8 @@ const catalogAddress = import.meta.env.VITE_CATALOG_URL
 
 async function getDevicesByUserId(userId: string): Promise<string> {
 
-  return axios
-    .get(`${catalogAddress}/device/?client_id=${userId}`, {
-      headers: { 'Content-Type': 'application/json', Accept: '*/*' },
-    })
+  return httpClient
+    .get(`${catalogAddress}/device/?client_id=${userId}`)
     .then((res) => {
       return EJSON.stringify(res.data)
     })

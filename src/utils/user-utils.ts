@@ -1,3 +1,4 @@
+import { userController } from '@/controllers/app-controller'
 import { parseUsers, User } from '@/models/user-model'
 import { createUserService, getUsersService } from '@/services/user-service'
 import { EJSON } from 'bson'
@@ -20,5 +21,12 @@ async function createUser(user: User): Promise<void> {
     }
   })
 }
+
+function handleUserStorage(event: StorageEvent, userId: string): void {
+  if (event.key === `users`) {
+    userController.value = parseUsers(event.newValue!)
+  }
+}
+
 
 export { getUserList, createUser }

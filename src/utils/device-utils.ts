@@ -1,5 +1,7 @@
+import { deviceController } from '@/controllers/app-controller'
 import { parseDevices, type DeviceModel } from '@/models/device-model'
 import { getDevicesByUserId } from '@/services/device-service'
+import storageClient from '@/stores/local-storage'
 
 async function getDeviceListByUserId(userId: string): Promise<DeviceModel[]> {
   const cache = localStorage.getItem(`devices_${userId}`)
@@ -9,6 +11,16 @@ async function getDeviceListByUserId(userId: string): Promise<DeviceModel[]> {
   return getDevicesByUserId(userId).then((devices) => {
     return parseDevices(devices)
   })
+}
+
+function handleDeviceStorage(event: StorageEvent): void {
+  if (event.key === `devices_`) {
+    deviceController.value[''] = parseDevices(event.newValue!)
+  }
+}
+
+function setupDeviceStorage(userId: string): void {
+  storageClient.watch(`devices-${userId}`, handleDeviceStorage)
 }
 
 export { getDeviceListByUserId }
