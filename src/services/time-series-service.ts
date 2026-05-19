@@ -6,7 +6,7 @@ export async function getQisReadings(
   client_id: string,
   start_time: string,
   end_time: string,
-): Promise<string> {
+): Promise<object> {
 
   return httpClient
     .get(`${qisAddress}/?user_id=${client_id}\&start_time=${start_time}\&end_time=${end_time}`)
