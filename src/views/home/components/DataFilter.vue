@@ -48,9 +48,10 @@ watch(
             <label>End time</label>
             <input type="datetime-local" v-model="end_time" required />
             <label>Select Sensor Type</label>
-            <select v-model="device_type" required>
+            <select v-if="deviceTypes.length > 0" v-model="device_type" required>
                 <option v-for="tp in deviceTypes" :value="tp">{{ tp }}</option>
             </select>
+            <span v-else>No devices associated with this user</span>
             <input type="submit" />
         </form>
     </div>

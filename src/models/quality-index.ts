@@ -1,5 +1,5 @@
 import type { QualityIndexItem } from './quality-index-item'
-import { EJSON } from 'bson'
+
 export class QualityIndex {
   client_id: string
   start_time: string
@@ -18,11 +18,11 @@ export class QualityIndex {
     this.quality_indexes = quality_indexes
   }
 }
-export function parseQis(qis_str: any): QualityIndex[] {
-  const user_obj = EJSON.parse(qis_str) as QualityIndex[]
-  return user_obj.map((qis) => Object.assign(new QualityIndex(), qis))
+export function parseQis(qis_obj: object[]): QualityIndex[] {
+
+  return qis_obj.map((qis) => Object.assign(new QualityIndex(), qis))
 }
-export function parseOneQis(qis_str: any): QualityIndex {
-  const qis_obj = EJSON.parse(qis_str) as QualityIndex
+export function parseOneQis(qis_obj: object): QualityIndex {
+
   return Object.assign(new QualityIndex(), qis_obj)
 }
