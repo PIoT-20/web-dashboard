@@ -33,7 +33,6 @@ watch(
     async (nUser) => {
         if (!nUser) return
         deviceTypes.value = await getDeviceTypes(nUser._id.toString())
-        console.log(deviceTypes.value)
     },
     { immediate: true },
 )
@@ -42,7 +41,7 @@ watch(
 <template>
     <div id="data-filter">
         <h2>Data Filter</h2>
-        <form @submit.prevent="emitData()">
+        <form>
             <label>Start time</label>
             <input type="datetime-local" v-model="start_time" required />
             <label>End time</label>
@@ -52,7 +51,7 @@ watch(
                 <option v-for="tp in deviceTypes" :value="tp">{{ tp }}</option>
             </select>
             <span v-else>No devices associated with this user</span>
-            <input type="submit" />
+            <button @click="emitData()">Filter</button>
         </form>
     </div>
 </template>
