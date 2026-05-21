@@ -2,7 +2,7 @@
 import { parseUsers } from '@/models/user-model'
 import storageClient from '@/stores/local-storage'
 import UserCard from './UserCard.vue'
-const users = parseUsers(storageClient.getItem('users') || '[]')
+const users = parseUsers(storageClient.get('users') || '[]')
 </script>
 
 <template>

@@ -7,7 +7,7 @@ export async function getQis(
   start_time: string,
   end_time: string,
 ): Promise<QualityIndex | void> {
-  return getQisReadings(userId, start_time, end_time).then((qis) => {
+  return getQisReadings(userId, start_time, end_time).then((qis: string) => {
     localStorage.setItem(`qis-${userId}-${start_time}-${end_time}`, qis)
     return parseOneQis(qis)
   })
