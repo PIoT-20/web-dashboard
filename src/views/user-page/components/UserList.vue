@@ -1,15 +1,14 @@
 <script setup lang="ts">
-import { parseUsers } from '@/models/user-model'
-import storageClient from '@/stores/local-storage'
 import UserCard from './UserCard.vue'
-const users = parseUsers(storageClient.get('users') || '[]')
+import { userController } from '@/controllers/app-controller';
+
 </script>
 
 <template>
     <h1>User List</h1>
 
     <ul id="user-list">
-        <UserCard v-for="user in users" :user="user" />
+        <UserCard v-for="user in userController" :user="user" />
     </ul>
 </template>
 <style lang="css" scoped>

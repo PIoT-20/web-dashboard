@@ -18,10 +18,7 @@ export class QualityIndex {
     this.quality_indexes = quality_indexes
   }
 }
-export function parseQis(qis_obj: object[]): QualityIndex[] {
 
-  return qis_obj.map((qis) => Object.assign(new QualityIndex(), qis))
-}
 export function parseOneQis(qis_str: string): QualityIndex {
   const qis_obj = JSON.parse(qis_str)
   return Object.assign(new QualityIndex(), qis_obj)

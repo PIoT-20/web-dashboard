@@ -5,5 +5,6 @@ abstract class HttpClientInterface {
   abstract post(url: string, data: any): Promise<AxiosResponse>
   abstract put(url: string, data: any): Promise<AxiosResponse>
   abstract delete(url: string): Promise<AxiosResponse>
+  abstract defaults: object
 }
 export default HttpClientInterface;

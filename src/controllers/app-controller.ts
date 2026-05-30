@@ -5,7 +5,7 @@ import { ref, type Ref } from "vue";
 
 const deviceController: Ref<Record<string, DeviceModel[]>> = ref({})
 const userController: Ref<User[]> = ref([])
-const qisController: Ref<Record<string, QualityIndex[]>> = ref({})
+const qisController: Ref<Record<string, QualityIndex>> = ref({})
 
 export {
   deviceController,

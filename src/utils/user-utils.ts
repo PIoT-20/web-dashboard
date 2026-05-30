@@ -5,6 +5,7 @@ import storageClient from '@/stores/local-storage'
 import { EJSON } from 'bson'
 import { getDeviceListByUserId } from './device-utils'
 import type { DeviceModel } from '@/models/device-model'
+import { getCachedQis } from './time-series-utils'
 
 async function getUserList(): Promise<User[] | void> {
   const cache = localStorage.getItem('users')
@@ -27,7 +28,7 @@ async function createUser(user: User): Promise<void> {
 
 function watchUsers(event: StorageEvent): void {
   if (event.key === `users`) {
-    userController.value = parseUsers(event.newValue!)
+    userController.value = parseUsers(event.newValue || '[]')
   }
 }
 
@@ -41,6 +42,7 @@ async function setupUserDevices() {
     storageClient.set("users", EJSON.stringify(users))
     userController.value = users
     users.forEach((user) => {
+      getCachedQis(user._id.toString())
       storageClient.watch(user.watchUserDevices)
       getDeviceListByUserId(user._id.toString()).then((devices: DeviceModel[] | void) => {
         deviceController.value[`devices_${user._id.toString()}`] = devices ?? []
