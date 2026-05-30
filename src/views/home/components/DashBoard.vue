@@ -12,19 +12,19 @@ const user: Ref<User | undefined> = ref(undefined)
 const qis: Ref<QualityIndexItem[]> = ref([])
 </script>
 <template>
-<BaseLayout>
-    <template v-slot:main>
-        <Suspense>
-            <HeatMap :selected_user="user" :qis="qis" />
-            <template #fallback> Loading... </template>
-        </Suspense>
+    <BaseLayout>
+        <template v-slot:main>
+            <Suspense>
+                <HeatMap :selected_user="user" :qis="qis" />
+                <template #fallback> Loading... </template>
+            </Suspense>
 
-    </template>
-    <template v-slot:side>
-        <UserSelector v-on:user-selected="(u) => (user = u)" />
-        <DataFilter :user="user" v-on:filter="(newQis) => (qis = newQis)" />
-        <QisList />
-    </template>
-</BaseLayout>
+        </template>
+        <template v-slot:side>
+            <UserSelector v-on:user-selected="(u) => (user = u)" />
+            <DataFilter :user="user" v-on:filter="(newQis) => (qis = newQis)" />
+            <QisList :user="user" />
+        </template>
+    </BaseLayout>
 </template>
 <style lang="css" scoped></style>

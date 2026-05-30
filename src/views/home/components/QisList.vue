@@ -1,18 +1,24 @@
 <script lang="ts" setup>
 import { qisController } from '@/controllers/app-controller';
-import { ref } from 'vue';
+import { User } from '@/models/user-model';
 
-const qisList = ref(qisController.value);
+const props = defineProps<{ user: User | undefined }>();
+
+
 </script>
 <template>
-<div>
-    <ul>
-        <li v-for="qis in qisList">
-            {{ qis.client_id }}
-            {{ qis.start_time }}
-            {{ qis.end_time }}
-        </li>
-    </ul>
-</div>
+    <h2>QIS History</h2>
+    <div v-if="props.user">
+        <ul v-for="qis in qisController[props.user?._id.toString()]!.quality_indexes">
+            <li>
+                <h4>{{ qis!.device_type }}</h4>
+                {{ qis!.location }}
+                {{ qis!.quality_index }}
+            </li>
+        </ul>
+    </div>
+    <div v-else>
+        <p>Please select user to view your QIS history.</p>
+    </div>
 </template>
 <style lang="css" scoped></style>
