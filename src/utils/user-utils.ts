@@ -9,7 +9,7 @@ import { getCachedQis } from './time-series-utils'
 
 async function getUserList(): Promise<User[] | void> {
   const cache = localStorage.getItem('users')
-  if (cache) {
+  if (cache && cache !== '[]') {
     return parseUsers(cache)
   }
   return getUsersService().then((res) => {

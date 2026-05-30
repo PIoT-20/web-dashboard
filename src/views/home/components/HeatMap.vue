@@ -1,6 +1,8 @@
 <script setup lang="ts">
+import { loadingHeatMap } from '@/controllers/app-controller';
 import type { QualityIndexItem } from '@/models/quality-index-item'
 import type { User } from '@/models/user-model'
+import Loading from 'vue-loading-overlay'
 import { watch } from 'vue'
 
 const props = defineProps<{
@@ -11,7 +13,9 @@ const props = defineProps<{
 watch(
     () => props.qis,
     (newQis) => {
+
         renderHeat(newQis)
+
     },
 )
 
@@ -44,15 +48,16 @@ function renderHeat(qis: QualityIndexItem[]) {
 </script>
 
 <template>
-    <h1>Heat Map</h1>
-    <div id="hitmap-div">
-        <div v-if="props.selected_user">
-            <div id="svg-map" v-html="getUserMap(props.selected_user.svg_map)"></div>
-        </div>
-        <div v-else>
-            <p>Select User at User Selector, define a time period and filter by device type</p>
-        </div>
+<h1>Heat Map</h1>
+<div id="hitmap-div">
+    <div v-if="props.selected_user">
+        <loading v-if="loadingHeatMap" :active="loadingHeatMap"></loading>
+        <div id="svg-map" v-html="getUserMap(props.selected_user.svg_map)"></div>
     </div>
+    <div v-else>
+        <p>Select User at User Selector, define a time period and filter by device type</p>
+    </div>
+</div>
 </template>
 
 <style scoped>
