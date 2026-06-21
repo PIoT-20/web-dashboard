@@ -10,11 +10,12 @@ const props = defineProps<{ user: User | undefined }>();
 <template>
 <div id="qis-list">
     <h2>History</h2>
-    <div v-if="props.user">
-        <ul v-for="qis in qisController[props.user?._id.toString()]!.quality_indexes">
+    <div v-if="props.user && qisController[props.user._id.toString()]">
+        <ul v-for="qis in qisController[props.user._id.toString()]!.quality_indexes">
             <QisCard :qis="qis" />
         </ul>
     </div>
+    <p class="empty-hint" v-else-if="props.user">No quality history yet for this user.</p>
     <p class="empty-hint" v-else>Please select a user to view your QIS history.</p>
 </div>
 </template>
