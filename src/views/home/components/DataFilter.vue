@@ -43,25 +43,87 @@ watch(
 
 <template>
 <div id="data-filter">
-    <h2>Data Filter</h2>
+    <h2>Filters</h2>
     <form>
         <label>Start time</label>
         <input type="datetime-local" v-model="start_time" required />
         <label>End time</label>
         <input type="datetime-local" v-model="end_time" required />
-        <label>Select Sensor Type</label>
+        <label>Sensor type</label>
         <select v-if="deviceTypes.length > 0" v-model="device_type" required>
             <option v-for="tp in deviceTypes" :value="tp">{{ tp }}</option>
         </select>
-        <span v-else>No devices associated with this user</span>
-        <button @click="emitData()">Filter</button>
+        <span class="empty-hint" v-else>No devices associated with this user</span>
+        <button type="button" @click="emitData()">Apply filters</button>
     </form>
 </div>
 </template>
 
 <style scoped>
+#data-filter {
+    text-align: left;
+}
+
+#data-filter h2 {
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--color-text-muted);
+    margin-bottom: 16px;
+}
+
 #data-filter form {
     display: flex;
     flex-direction: column;
+    gap: 6px;
+}
+
+#data-filter label {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--color-text-muted);
+    margin-top: 10px;
+}
+
+#data-filter input,
+#data-filter select {
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-border);
+    background-color: var(--color-surface);
+    color: var(--color-text);
+    font-family: var(--font-sans);
+    font-size: 0.95rem;
+}
+
+#data-filter input:focus,
+#data-filter select:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px var(--color-primary-light);
+}
+
+#data-filter .empty-hint {
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+}
+
+#data-filter button {
+    margin-top: 18px;
+    padding: 10px 12px;
+    border-radius: var(--radius-md);
+    background-color: var(--color-primary);
+    color: #ffffff;
+    border: none;
+    font-family: var(--font-sans);
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.15s ease;
+}
+
+#data-filter button:hover {
+    background-color: var(--color-primary-dark);
 }
 </style>

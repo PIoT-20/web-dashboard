@@ -15,32 +15,52 @@
 #base-layout {
   display: flex;
   flex-direction: row;
-  gap: 16px;
+  gap: 20px;
   height: 100vh;
 
-  padding: 16px;
+  padding: 24px;
   width: 100%;
 
   box-sizing: border-box;
 }
 #side-content {
   height: 100%;
-  width: 25%;
+  width: 30%;
+  min-width: 280px;
   position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  overflow-y: auto;
 }
 #main-content {
   height: 100%;
-  width: 75%;
+  width: 70%;
   max-height: 100%;
   position: relative;
 }
 .card {
   position: relative;
 
-  border-radius: 30px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
   text-align: center;
   height: 100%;
-  box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.2);
+  padding: 24px;
+}
+
+@media (max-width: 900px) {
+  #base-layout {
+    flex-direction: column;
+    height: auto;
+    min-height: 100vh;
+  }
+  #side-content,
+  #main-content {
+    width: 100%;
+    height: auto;
+  }
 }
 </style>

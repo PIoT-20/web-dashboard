@@ -12,44 +12,48 @@ const props = defineProps<{
 </script>
 <template>
 <li @click="selectQis">
-    <div id="user-card" class="card">
-
+    <div id="user-card">
         <h4>{{ qis!.device_type }}</h4>
         <p>ID: {{ qis!.device_id }}</p>
         <p>Location: {{ qis!.location }}</p>
         <p>Quality Index: {{ qis!.quality_index }}</p>
-
-
     </div>
 </li>
 </template>
 <style lang="css" scoped>
-#user-card:hover {
-    cursor: pointer;
-    background-color: #f0f0f0;
+li {
+    list-style: none;
+    width: 100%;
 }
 
 #user-card {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    gap: 2px;
     width: 100%;
-    background-color: white;
+    padding: 10px 14px;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-border);
+    background-color: var(--color-surface);
+    text-align: left;
+    cursor: pointer;
+    transition: border-color 0.15s ease, background-color 0.15s ease;
 }
 
-.card {
-    border-radius: 30px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    text-align: center;
+#user-card:hover {
+    border-color: var(--color-primary);
+    background-color: var(--color-primary-light);
 }
 
-li {
-    list-style: none;
-    width: 100%;
-    align-items: center;
-    align-content: center;
-    justify-content: center;
-    justify-items: center;
+#user-card h4 {
+    margin: 0 0 2px 0;
+    font-size: 0.9rem;
+    color: var(--color-text);
+}
+
+#user-card p {
+    margin: 0;
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
 }
 </style>
