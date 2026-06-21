@@ -72,21 +72,29 @@ h1 {
     position: relative;
     height: calc(100% - 1.3rem - 16px);
     width: 100%;
+    overflow: hidden;
 }
 
 .map-wrapper {
     position: relative;
     height: 100%;
     width: 100%;
+    overflow: hidden;
 }
 
 #svg-map {
     position: absolute;
-    top: 16px;
-    left: 16px;
-    height: 400px;
-    width: 400px;
-    object-fit: fill;
+    inset: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#svg-map :deep(svg) {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
 }
 
 .svg-dots {
