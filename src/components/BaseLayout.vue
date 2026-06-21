@@ -16,7 +16,7 @@
   display: flex;
   flex-direction: row;
   gap: 20px;
-  height: 100vh;
+  height: 100%;
 
   padding: 24px;
   width: 100%;

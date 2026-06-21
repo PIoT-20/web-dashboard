@@ -5,7 +5,6 @@ import SideBarButton from './SideBarButton.vue'
 
 <template>
     <div id="side-bar">
-        <h2 class="brand">Quality Monitor</h2>
         <ul>
             <SideBarButton label="Dashboard" to="/" />
             <SideBarButton label="User Profile" to="/user" />
@@ -25,15 +24,6 @@ import SideBarButton from './SideBarButton.vue'
     border: 1px solid var(--color-border);
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-card);
-}
-
-.brand {
-    text-align: left;
-    font-size: 1.05rem;
-    color: var(--color-primary-dark);
-    padding: 0 8px 20px 8px;
-    border-bottom: 1px solid var(--color-border);
-    margin-bottom: 12px;
 }
 
 ul {

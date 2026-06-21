@@ -1,30 +1,23 @@
 <script lang="ts" setup>
 import BaseLayout from '../../../components/BaseLayout.vue'
 import HeatMap from '../components/HeatMap.vue'
-import UserSelector from '../components/UserSelector.vue'
-import { ref, type Ref } from 'vue'
-import { User } from '@/models/user-model'
 import DataFilter from './DataFilter.vue'
 
-import { QualityIndexItem } from '@/models/quality-index-item'
 import QisList from './QisList.vue'
-import { selectedQis } from '@/controllers/app-controller'
-const user: Ref<User | undefined> = ref(undefined)
-
+import { currentUser, selectedQis } from '@/controllers/app-controller'
 </script>
 <template>
 <BaseLayout>
     <template v-slot:main>
         <Suspense>
-            <HeatMap :selected_user="user" :qis="selectedQis" />
+            <HeatMap :selected_user="currentUser" :qis="selectedQis" />
             <template #fallback> Loading... </template>
         </Suspense>
 
     </template>
     <template v-slot:side>
-        <UserSelector v-on:user-selected="(u) => (user = u)" />
-        <DataFilter :user="user" v-on:filter="(newQis) => (selectedQis = newQis)" />
-        <QisList :user="user" />
+        <DataFilter :user="currentUser" v-on:filter="(newQis) => (selectedQis = newQis)" />
+        <QisList :user="currentUser" />
     </template>
 </BaseLayout>
 </template>
