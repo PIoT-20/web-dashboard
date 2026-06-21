@@ -13,14 +13,14 @@ function initials(name: string): string {
     if (parts.length === 0) return '?'
     return parts
         .slice(0, 2)
-        .map((p) => p[0].toUpperCase())
+        .map((p) => p[0]?.toUpperCase() ?? '')
         .join('')
 }
 
 function colorFor(id: string): string {
     let hash = 0
     for (let i = 0; i < id.length; i++) hash = (hash * 31 + id.charCodeAt(i)) >>> 0
-    return palette[hash % palette.length]
+    return palette[hash % palette.length] ?? '#0d9488'
 }
 
 function isCurrent(user: User): boolean {

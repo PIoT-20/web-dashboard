@@ -13,7 +13,4 @@ export async function getQisReadings(
     .then((res) => {
       return JSON.stringify(res.data)
     })
-    .catch((err) => {
-      throw `cannot fetch QIS ${err}`
-    })
 }

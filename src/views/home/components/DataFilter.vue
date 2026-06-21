@@ -4,6 +4,7 @@ import type { User } from '@/models/user-model'
 import { getDeviceListByUserId } from '@/utils/device-utils'
 
 import { getQis } from '@/utils/time-series-utils'
+import { isAxiosError } from 'axios'
 
 import { ref, watch, type Ref } from 'vue'
 
@@ -12,17 +13,32 @@ const end_time = ref('')
 const device_type = ref('')
 const props = defineProps<{ user: User | undefined }>()
 const deviceTypes: Ref<string[]> = ref([])
+const errorMessage: Ref<string> = ref('')
 const emits = defineEmits(['filter'])
 
 async function emitData() {
-    loadingHeatMap.value = true
     if (!props.user) return
-    start_time.value = new Date(start_time.value).toISOString()
-    end_time.value = new Date(end_time.value).toISOString()
-    const data = await getQis(props.user._id.toString(), start_time.value, end_time.value)
-    const filteredData = data!.quality_indexes.filter((qi) => qi.device_type == device_type.value)
-    emits('filter', filteredData)
-    loadingHeatMap.value = false
+    errorMessage.value = ''
+    loadingHeatMap.value = true
+    try {
+        start_time.value = new Date(start_time.value).toISOString()
+        end_time.value = new Date(end_time.value).toISOString()
+        const data = await getQis(props.user._id.toString(), start_time.value, end_time.value)
+        const filteredData = data?.quality_indexes.filter((qi) => qi.device_type == device_type.value) ?? []
+        if (filteredData.length === 0) {
+            errorMessage.value = 'No readings found for the selected period and sensor type.'
+        }
+        emits('filter', filteredData)
+    } catch (err) {
+        if (isAxiosError(err) && err.response?.status === 404) {
+            errorMessage.value = 'No readings found for the selected period and sensor type.'
+        } else {
+            errorMessage.value = 'Could not load quality readings. Please try again.'
+        }
+        emits('filter', [])
+    } finally {
+        loadingHeatMap.value = false
+    }
 }
 async function getDeviceTypes(userID: string): Promise<string[]> {
     const unique_types: Set<string> = new Set()
@@ -55,6 +71,7 @@ watch(
         </select>
         <span class="empty-hint" v-else>No devices associated with this user</span>
         <button type="button" @click="emitData()">Apply filters</button>
+        <p v-if="errorMessage" class="error-message">{{ errorMessage }}</p>
     </form>
 </div>
 </template>
@@ -125,5 +142,16 @@ watch(
 
 #data-filter button:hover {
     background-color: var(--color-primary-dark);
+}
+
+#data-filter .error-message {
+    margin: 10px 0 0 0;
+    padding: 8px 10px;
+    border-radius: var(--radius-md);
+    background-color: #fef2f2;
+    border: 1px solid #fecaca;
+    color: #b91c1c;
+    font-size: 0.82rem;
+    line-height: 1.4;
 }
 </style>
