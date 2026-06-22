@@ -1,8 +1,11 @@
 import httpClient from '@/api/http-client'
+import type { DeviceModel } from '@/models/device-model'
 import { EJSON } from 'bson'
 
 
 const catalogAddress = import.meta.env.VITE_CATALOG_URL
+
+export type NewDevice = Omit<DeviceModel, '_id'>
 
 async function getDevicesByUserId(userId: string): Promise<string> {
 
@@ -16,4 +19,14 @@ async function getDevicesByUserId(userId: string): Promise<string> {
     })
 }
 
-export { getDevicesByUserId }
+async function updateDeviceService(device: DeviceModel): Promise<void> {
+  await httpClient.put(`${catalogAddress}/device`, EJSON.stringify(device))
+}
+
+async function createDeviceService(device: NewDevice): Promise<string> {
+  return httpClient
+    .post(`${catalogAddress}/device`, EJSON.stringify(device))
+    .then((res) => EJSON.stringify(res.data))
+}
+
+export { getDevicesByUserId, updateDeviceService, createDeviceService }

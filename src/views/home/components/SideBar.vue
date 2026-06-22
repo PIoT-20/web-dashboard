@@ -7,6 +7,7 @@ import SideBarButton from './SideBarButton.vue'
     <div id="side-bar">
         <ul>
             <SideBarButton label="Dashboard" to="/" />
+            <SideBarButton label="Devices" to="/devices" />
             <SideBarButton label="User Profile" to="/user" />
         </ul>
     </div>
