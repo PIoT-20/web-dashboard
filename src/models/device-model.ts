@@ -34,3 +34,7 @@ export function parseDevices(device_str: string): DeviceModel[] {
   const user_obj: DeviceModel[] = EJSON.parse(device_str)
   return user_obj.map((device: DeviceModel) => Object.assign(new DeviceModel(), device))
 }
+export function parseDevice(device_str: string): DeviceModel {
+  const device_obj: DeviceModel = EJSON.parse(device_str)
+  return Object.assign(new DeviceModel(), device_obj)
+}

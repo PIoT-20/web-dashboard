@@ -4,37 +4,35 @@ import SideBarButton from './SideBarButton.vue'
 </script>
 
 <template>
-    <div id="side-bar" class="card">
+    <div id="side-bar">
         <ul>
             <SideBarButton label="Dashboard" to="/" />
+            <SideBarButton label="Devices" to="/devices" />
             <SideBarButton label="User Profile" to="/user" />
         </ul>
     </div>
 </template>
 <style lang="css" scoped>
 #side-bar {
+    position: relative;
     height: 100%;
     width: 100%;
+    box-sizing: border-box;
+    padding: 20px 16px;
     display: flex;
     flex-direction: column;
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-card);
 }
 
 ul {
-    height: 100%;
     width: 100%;
     padding: 0;
     margin: 0;
-
-    align-items: center;
-    justify-content: center;
-    align-content: center;
-}
-
-.card {
-    position: relative;
-    border-radius: 30px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
 }
 </style>
