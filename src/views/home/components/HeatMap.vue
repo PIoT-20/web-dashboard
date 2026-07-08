@@ -23,8 +23,14 @@ watch(
 function getUserMap(base64Map: string): string {
     return atob(base64Map)
 }
-function getColorByMeasurament(qi: number): string {
-    return 'red'
+function getColorByMeasurement(qi: number): string {
+    qi = Math.max(0, Math.min(1, qi));
+
+    const r = Math.round(255 * qi);
+    const g = 0;
+    const b = Math.round(255 * (1 - qi));
+
+    return `rgb(${r}, ${g}, ${b})`;
 }
 function renderHeat(qis: QualityIndexItem[]) {
     const doc = document.getElementById('svg-map')
@@ -38,7 +44,7 @@ function renderHeat(qis: QualityIndexItem[]) {
 
         if (props.qis) {
             props.qis.forEach((qi) => {
-                const color = getColorByMeasurament(qi.quality_index)
+                const color = getColorByMeasurement(qi.quality_index)
                 doc.querySelector(`#${CSS.escape(qi.location)}`)?.setAttribute('fill', color)
             })
         }
