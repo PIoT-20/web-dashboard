@@ -1,7 +1,8 @@
 import { qisController } from '@/controllers/app-controller'
 import { parseOneQis, type QualityIndex } from '@/models/quality-index'
+import { parseService, type ServiceModel } from '@/models/service-model'
 
-import { getQisReadings } from '@/services/time-series-service'
+import { getQisReadings, getQisUrl } from '@/services/time-series-service'
 
 export async function getQis(
   userId: string,
@@ -20,4 +21,11 @@ export function getCachedQis(userId: string) {
     qisController.value[userId] = parseOneQis(qis)
   }
 
+}
+async function getQisAddress() {
+  const service: ServiceModel = parseService(await getQisUrl())
+  if (service)
+    import.meta.env.VITE_QIS_URL = service.address;
+  else
+    throw new Error('QIS URL not found');
 }

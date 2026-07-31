@@ -3,7 +3,6 @@ import axios from "axios";
 
 function createHttpClient(): HttpClientInterface {
   return axios.create({
-    baseURL: "http://localhost",
     headers: { 'Content-Type': 'application/json', Accept: '*/*' },
   })
 
