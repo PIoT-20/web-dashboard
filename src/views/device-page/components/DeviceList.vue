@@ -28,27 +28,23 @@ function onDeviceCreated(device: DeviceModel) {
 </script>
 
 <template>
-<div id="device-list">
-    <div class="list-header">
-        <h1>Devices</h1>
-        <button type="button" class="new-device-btn" @click="showCreateModal = true">+ New device</button>
-    </div>
-    <div v-if="devices.length > 0" class="room-groups">
-        <section v-for="[room, roomDevices] in roomGroups" :key="room" class="room-group">
-            <h2>{{ room }}</h2>
-            <ul>
-                <DeviceCard v-for="device in roomDevices" :key="device._id.toString()" :device="device" />
-            </ul>
-        </section>
-    </div>
-    <p v-else class="empty-hint">No devices associated with this user.</p>
+    <div id="device-list">
+        <div class="list-header">
+            <h1>Devices</h1>
+            <button type="button" class="new-device-btn" @click="showCreateModal = true">+ New device</button>
+        </div>
+        <div v-if="devices.length > 0" class="room-groups">
+            <section v-for="[room, roomDevices] in roomGroups" :key="room" class="room-group">
+                <h2>{{ room }}</h2>
+                <ul>
+                    <DeviceCard v-for="device in roomDevices" :key="device._id.toString()" :device="device" />
+                </ul>
+            </section>
+        </div>
+        <p v-else class="empty-hint">No devices associated with this user.</p>
 
-    <CreateDeviceModal
-        v-if="showCreateModal"
-        @close="showCreateModal = false"
-        @created="onDeviceCreated"
-    />
-</div>
+        <CreateDeviceModal v-if="showCreateModal" @close="showCreateModal = false" @created="onDeviceCreated" />
+    </div>
 </template>
 
 <style scoped>
