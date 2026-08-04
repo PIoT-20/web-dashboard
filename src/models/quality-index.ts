@@ -19,6 +19,12 @@ export class QualityIndex {
   }
 }
 
+export function parseQis(qis_str: string): QualityIndex[] {
+  const qis_obj: QualityIndex[] = JSON.parse(qis_str)
+  return qis_obj.map((q) => parseOneQis(JSON.stringify(q)));
+
+}
+
 export function parseOneQis(qis_str: string): QualityIndex {
   const qis_obj = JSON.parse(qis_str)
   return Object.assign(new QualityIndex(), qis_obj)

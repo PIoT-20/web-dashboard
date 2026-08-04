@@ -106,7 +106,8 @@ async function submit() {
                 <label>Room / location</label>
                 <select v-model="location" required>
                     <option value="" disabled>Select a location</option>
-                    <option v-for="room in currentUser?.points" :value="room.id">{{ room.id }}</option>
+                    <option v-for="room in currentUser?.points.filter((room) => room.id.includes('room'))"
+                        :value="room.id">{{ room.id }}</option>
                 </select>
 
                 <label>Description</label>

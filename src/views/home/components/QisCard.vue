@@ -11,14 +11,14 @@ const props = defineProps<{
 }>()
 </script>
 <template>
-<li @click="selectQis">
-    <div id="user-card">
-        <h4>{{ qis!.device_type }}</h4>
-        <p>ID: {{ qis!.device_id }}</p>
-        <p>Location: {{ qis!.location }}</p>
-        <p>Quality Index: {{ qis!.quality_index }}</p>
-    </div>
-</li>
+    <li @click="selectQis">
+        <div id="user-card">
+            <h4>{{ qis!.device_type }}</h4>
+            <p>ID: {{ qis!.device_id }}</p>
+            <p>Location: {{ qis!.location }}</p>
+            <p>Quality Index: {{ qis!.quality_index }}</p>
+        </div>
+    </li>
 </template>
 <style lang="css" scoped>
 li {

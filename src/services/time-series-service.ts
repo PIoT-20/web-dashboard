@@ -1,6 +1,7 @@
 import httpClient from '@/api/http-client'
+import { QIS_ADDRESS } from '@/controllers/app-controller'
 
-const qisAddress = import.meta.env.VITE_QIS_URL
+
 const catalogAddress = import.meta.env.VITE_CATALOG_URL
 
 export async function getQisReadings(
@@ -10,7 +11,7 @@ export async function getQisReadings(
 ): Promise<string> {
 
   return httpClient
-    .get(`${qisAddress}/?user_id=${client_id}\&start_time=${start_time}\&end_time=${end_time}`)
+    .get(`${QIS_ADDRESS.value}/?user_id=${client_id}\&start_time=${start_time}\&end_time=${end_time}`)
     .then((res) => {
       return JSON.stringify(res.data)
     })
