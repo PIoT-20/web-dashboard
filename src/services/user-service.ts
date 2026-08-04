@@ -5,8 +5,6 @@ import { EJSON } from 'bson'
 const catalogAddress = import.meta.env.VITE_CATALOG_URL
 
 async function getUsersService(): Promise<string> {
-
-
   return httpClient
     .get(`${catalogAddress}/user`)
     .then((res) => {

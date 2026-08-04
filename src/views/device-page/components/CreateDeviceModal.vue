@@ -90,66 +90,70 @@ async function submit() {
 </script>
 
 <template>
-<div class="modal-backdrop" @click.self="emit('close')">
-    <div class="modal-card">
-        <div class="modal-header">
-            <h2>New device</h2>
-            <button type="button" class="close-btn" @click="emit('close')">&times;</button>
-        </div>
-        <form @submit.prevent="submit">
-            <label>Device type</label>
-            <select v-model="device_type" required>
-                <option value="" disabled>Select a device type</option>
-                <option v-for="type in DEVICE_TYPES" :key="type" :value="type">{{ type }}</option>
-            </select>
-
-            <label>Room / location</label>
-            <input type="text" v-model="location" required />
-
-            <label>Description</label>
-            <textarea v-model="description" rows="2"></textarea>
-
-            <h3>Connection settings</h3>
-            <label>Protocol</label>
-            <select v-model="connection.protocol" required>
-                <option value="EMULATOR">EMULATOR</option>
-                <option value="BLE">BLE</option>
-            </select>
-
-            <template v-if="connection.protocol === 'EMULATOR'">
-                <label>Emulator type</label>
-                <select v-model="connection.emulator_type" required>
-                    <option value="LIVE">LIVE</option>
-                    <option value="DUMP">DUMP</option>
+    <div class="modal-backdrop" @click.self="emit('close')">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h2>New device</h2>
+                <button type="button" class="close-btn" @click="emit('close')">&times;</button>
+            </div>
+            <form @submit.prevent="submit">
+                <label>Device type</label>
+                <select v-model="device_type" required>
+                    <option value="" disabled>Select a device type</option>
+                    <option v-for="type in DEVICE_TYPES" :key="type" :value="type">{{ type }}</option>
                 </select>
 
-                <template v-if="connection.emulator_type === 'DUMP'">
-                    <label>Start time</label>
-                    <input type="text" v-model="connection.start_time" placeholder="2026-01-02T00:00:00Z" />
-                    <label>End time</label>
-                    <input type="text" v-model="connection.end_time" placeholder="2026-01-04T00:00:00Z" />
+                <label>Room / location</label>
+                <select v-model="location" required>
+                    <option value="" disabled>Select a location</option>
+                    <option v-for="room in currentUser?.points.filter((room) => room.id.includes('room'))"
+                        :value="room.id">{{ room.id }}</option>
+                </select>
+
+                <label>Description</label>
+                <textarea v-model="description" rows="2"></textarea>
+
+                <h3>Connection settings</h3>
+                <label>Protocol</label>
+                <select v-model="connection.protocol" required>
+                    <option value="EMULATOR">EMULATOR</option>
+                    <option value="BLE">BLE</option>
+                </select>
+
+                <template v-if="connection.protocol === 'EMULATOR'">
+                    <label>Emulator type</label>
+                    <select v-model="connection.emulator_type" required>
+                        <option value="LIVE">LIVE</option>
+                        <option value="DUMP">DUMP</option>
+                    </select>
+
+                    <template v-if="connection.emulator_type === 'DUMP'">
+                        <label>Start time</label>
+                        <input type="text" v-model="connection.start_time" placeholder="2026-01-02T00:00:00Z" />
+                        <label>End time</label>
+                        <input type="text" v-model="connection.end_time" placeholder="2026-01-04T00:00:00Z" />
+                    </template>
+
+                    <label>Frequency (seconds)</label>
+                    <input type="number" min="1" v-model.number="connection.frequency_seconds" />
                 </template>
 
-                <label>Frequency (seconds)</label>
-                <input type="number" min="1" v-model.number="connection.frequency_seconds" />
-            </template>
+                <template v-else-if="connection.protocol === 'BLE'">
+                    <label>UUID</label>
+                    <input type="text" v-model="connection.uuid" placeholder="e.g. 4d2f1c0a-..." required />
+                    <label>Major</label>
+                    <input type="number" min="0" v-model.number="connection.major" />
+                    <label>Minor</label>
+                    <input type="number" min="0" v-model.number="connection.minor" />
+                </template>
 
-            <template v-else-if="connection.protocol === 'BLE'">
-                <label>UUID</label>
-                <input type="text" v-model="connection.uuid" placeholder="e.g. 4d2f1c0a-..." required />
-                <label>Major</label>
-                <input type="number" min="0" v-model.number="connection.major" />
-                <label>Minor</label>
-                <input type="number" min="0" v-model.number="connection.minor" />
-            </template>
-
-            <button type="submit" class="submit-btn" :disabled="saving">
-                {{ saving ? 'Creating...' : 'Create device' }}
-            </button>
-            <p v-if="errorMessage" class="error-message">{{ errorMessage }}</p>
-        </form>
+                <button type="submit" class="submit-btn" :disabled="saving">
+                    {{ saving ? 'Creating...' : 'Create device' }}
+                </button>
+                <p v-if="errorMessage" class="error-message">{{ errorMessage }}</p>
+            </form>
+        </div>
     </div>
-</div>
 </template>
 
 <style scoped>

@@ -7,12 +7,12 @@ import { ref, type Ref } from "vue";
 
 const deviceController: Ref<Record<string, DeviceModel[]>> = ref({})
 const userController: Ref<User[]> = ref([])
-const qisController: Ref<Record<string, QualityIndex>> = ref({})
+const qisController: Ref<Record<string, QualityIndex[]>> = ref({})
 const loadingHeatMap: Ref<boolean> = ref(false)
 const selectedQis: Ref<QualityIndexItem[]> = ref([])
 const currentUser: Ref<User | undefined> = ref(undefined)
 const selectedDevice: Ref<DeviceModel | undefined> = ref(undefined)
-
+const QIS_ADDRESS: Ref<string> = ref("");
 export {
   deviceController,
   userController,
@@ -21,4 +21,5 @@ export {
   selectedQis,
   currentUser,
   selectedDevice,
+  QIS_ADDRESS
 }
