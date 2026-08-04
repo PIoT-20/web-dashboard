@@ -41,7 +41,11 @@ async function emitData() {
     loadingHeatMap.value = true
     try {
         const data = await getQis(props.user._id.toString(), start.toISOString(), end.toISOString())
-        const filteredData = data?.quality_indexes.filter((qi) => qi.device_type == device_type.value) ?? []
+
+        const filteredData = device_type.value
+            ? data?.quality_indexes.filter((qi) => qi.device_type == device_type.value)
+            ?? [] : data?.quality_indexes ?? []
+
         if (filteredData.length === 0) {
             errorMessage.value = 'No readings found for the selected period and sensor type.'
         }
@@ -92,27 +96,28 @@ watch(
 </script>
 
 <template>
-<div id="data-filter">
-    <h2>Filters</h2>
-    <form>
-        <label>Start time</label>
-        <input type="datetime-local" v-model="start_time" required />
-        <label>End time</label>
-        <input type="datetime-local" v-model="end_time" required />
-        <div class="preset-row">
-            <button type="button" class="preset-btn" @click="applyPreset('week')">Last week</button>
-            <button type="button" class="preset-btn" @click="applyPreset('month')">Last month</button>
-            <button type="button" class="preset-btn" @click="applyPreset('year')">Last year</button>
-        </div>
-        <label>Sensor type</label>
-        <select v-if="deviceTypes.length > 0" v-model="device_type" required>
-            <option v-for="tp in deviceTypes" :value="tp">{{ tp }}</option>
-        </select>
-        <span class="empty-hint" v-else>No devices associated with this user</span>
-        <button type="button" @click="emitData()">Apply filters</button>
-        <p v-if="errorMessage" class="error-message">{{ errorMessage }}</p>
-    </form>
-</div>
+    <div id="data-filter">
+        <h2>Filters</h2>
+        <form>
+            <label>Start time</label>
+            <input type="datetime-local" v-model="start_time" required />
+            <label>End time</label>
+            <input type="datetime-local" v-model="end_time" required />
+            <div class="preset-row">
+                <button type="button" class="preset-btn" @click="applyPreset('week')">Last week</button>
+                <button type="button" class="preset-btn" @click="applyPreset('month')">Last month</button>
+                <button type="button" class="preset-btn" @click="applyPreset('year')">Last year</button>
+            </div>
+            <label>Sensor type</label>
+            <select v-if="deviceTypes.length > 0" v-model="device_type" required>
+                <option :value="null">All sensors</option>
+                <option v-for="tp in deviceTypes" :value="tp">{{ tp }}</option>
+            </select>
+            <span class="empty-hint" v-else>No devices associated with this user</span>
+            <button type="button" @click="emitData()">Apply filters</button>
+            <p v-if="errorMessage" class="error-message">{{ errorMessage }}</p>
+        </form>
+    </div>
 </template>
 
 <style scoped>
