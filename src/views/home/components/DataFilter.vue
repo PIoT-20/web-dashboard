@@ -42,9 +42,7 @@ async function emitData() {
     try {
         const data = await getQis(props.user._id.toString(), start.toISOString(), end.toISOString())
 
-        const filteredData = device_type.value
-            ? data?.quality_indexes.filter((qi) => qi.device_type == device_type.value)
-            ?? [] : data?.quality_indexes ?? []
+        const filteredData = data?.quality_indexes.filter((qi) => qi.device_type == device_type.value) ?? []
 
         if (filteredData.length === 0) {
             errorMessage.value = 'No readings found for the selected period and sensor type.'
@@ -110,7 +108,6 @@ watch(
             </div>
             <label>Sensor type</label>
             <select v-if="deviceTypes.length > 0" v-model="device_type" required>
-                <option :value="null">All sensors</option>
                 <option v-for="tp in deviceTypes" :value="tp">{{ tp }}</option>
             </select>
             <span class="empty-hint" v-else>No devices associated with this user</span>
