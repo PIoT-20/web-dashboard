@@ -5,7 +5,7 @@ import { userController } from '@/controllers/app-controller';
 </script>
 
 <template>
-    <h1>User List</h1>
+    <h3>User List</h3>
 
     <ul id="user-list">
         <UserCard v-for="user in userController" :user="user" />
@@ -15,7 +15,6 @@ import { userController } from '@/controllers/app-controller';
 #user-list {
     display: flex;
     flex-direction: column;
-    align-items: center;
     justify-content: center;
     align-items: center;
     align-content: center;

@@ -1,0 +1,50 @@
+<svg width="1100" height="900" viewBox="0 0 1100 900" xmlns="http://www.w3.org/2000/svg">
+
+      <!-- Exterior Walls -->
+      <path id="exterior_boundary" d="M80,50 L1020,50 L1020,850 L80,850 Z" fill="none"
+            stroke="#2c3e50" stroke-width="4" />
+
+      <!-- Room 1: Producao (Top Left) -->
+      <path id="room_producao" data-name="Produção"
+            d="M90,60 L555,60 L555,440 L90,440 Z"
+            fill="#ffffff" stroke="#34495e" stroke-width="2" />
+      <text x="322" y="330" font-family="Arial" font-size="20" font-weight="bold"
+            text-anchor="middle" fill="#2c3e50">PRODUÇÃO</text>
+      <text x="322" y="355" font-family="Arial" font-size="14"
+            text-anchor="middle" fill="#7f8c8d">room_producao</text>
+
+      <!-- Room 2: Armazem (Top Right) -->
+      <path id="room_armazem" data-name="Armazém"
+            d="M575,60 L1010,60 L1010,440 L575,440 Z"
+            fill="#ffffff" stroke="#34495e" stroke-width="2" />
+      <text x="792" y="330" font-family="Arial" font-size="20" font-weight="bold"
+            text-anchor="middle" fill="#2c3e50">ARMAZÉM</text>
+      <text x="792" y="355" font-family="Arial" font-size="14"
+            text-anchor="middle" fill="#7f8c8d">room_armazem</text>
+
+      <!-- Room 3: Corridor (Central Hallway) -->
+      <path id="room_corredor" data-name="Corredor"
+            d="M90,460 L1010,460 L1010,540 L90,540 Z"
+            fill="#ecf0f1" stroke="#34495e" stroke-width="2" stroke-dasharray="5,5" />
+      <text x="550" y="505" font-family="Arial" font-size="14" font-weight="bold"
+            text-anchor="middle" fill="#2c3e50">room_corredor</text>
+
+      <!-- Room 4: Utilidades (Bottom Left) -->
+      <path id="room_utilidades" data-name="Utilidades"
+            d="M90,560 L555,560 L555,840 L90,840 Z"
+            fill="#ffffff" stroke="#34495e" stroke-width="2" />
+      <text x="322" y="695" font-family="Arial" font-size="20" font-weight="bold"
+            text-anchor="middle" fill="#2c3e50">UTILIDADES</text>
+      <text x="322" y="720" font-family="Arial" font-size="14"
+            text-anchor="middle" fill="#7f8c8d">room_utilidades</text>
+
+      <!-- Room 5: Escritorio (Bottom Right) -->
+      <path id="room_escritorio" data-name="Escritório"
+            d="M575,560 L1010,560 L1010,840 L575,840 Z"
+            fill="#ffffff" stroke="#34495e" stroke-width="2" />
+      <text x="792" y="695" font-family="Arial" font-size="20" font-weight="bold"
+            text-anchor="middle" fill="#2c3e50">ESCRITÓRIO</text>
+      <text x="792" y="720" font-family="Arial" font-size="14"
+            text-anchor="middle" fill="#7f8c8d">room_escritorio</text>
+
+</svg>
